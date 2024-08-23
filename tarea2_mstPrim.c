@@ -15,6 +15,8 @@ int main(){
   for(int i = 0; i<m; i++ ){
     int u,v,peso;
     scanf("%d %d %d", &u, &v, &peso);
+    u--;
+    v--;
     matrizAdy[u][v] = peso; //peso de u -> v
     matrizAdy[v][u] = peso; //peso de v -> u
   }
