@@ -17,16 +17,29 @@ void prim(int m, int matrizAdy[m][m]){
   for(int cuenta=0; cuenta<m; cuenta++){
     int min= INT_MAX, indice_min;
 
-  for(int v = 0; v < m; v++){
-    if(vertices[v] == 0 && pesoMinimo[v] < min){
-      min = pesoMinimo[v];
-      indice_min = v;
+    for(int v = 0; v < m; v++){
+      if(vertices[v] == 0 && pesoMinimo[v] < min){
+        min = pesoMinimo[v];
+        indice_min = v;
+      }
+    }
+
+    int u = indice_min;
+    vertices[u] = 1;
+
+    for(int v = 0; v < m; v++){
+      if(matrizAdy[u][v] && vertices[v] == 0 && matrizAdy[u][v] < pesoMinimo[v]){
+        mst[v] = u;
+        pesoMinimo[v] = matrizAdy[u][v];
+      }
     }
   }
 
-  int u = indice_min;
-  vertices[u] = 1;
+  int pesoMinimoTotal=0;
+  for(int i=1; i < m; i++){
+    pesoMinimoTotal += matrizAdy[i][mst[i]];
   }
+  printf("%d", pesoMinimoTotal);
 }
 
 int main(){
@@ -52,12 +65,12 @@ int main(){
 
   prim(m, matrizAdy);
   //imprimir matriz
-  for(int i=0; i<m; i++){
-    for(int j=0; j<m; j++){
-      printf("%d ", matrizAdy[i][j]);
-    }
-    printf("\n");
-  }
+  // for(int i=0; i<m; i++){
+  //  for(int j=0; j<m; j++){
+  //    printf("%d ", matrizAdy[i][j]);
+  //  }
+  //  printf("\n");
+  // }
 
   return 0;
 }
