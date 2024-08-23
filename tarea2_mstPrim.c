@@ -2,13 +2,12 @@
 
 int main(){
   int m, costo_total;
-  int matriz[m][3];
-
   scanf("%d",&m);
 
+  int matrizAdy[m][m];
   for(int i=0; i<m; i++){
-    for(int j=0; j<3; j++){
-      matriz[i][j] = 0;
+    for(int j=0; j<m; j++){
+      matrizAdy[i][j] = 0;
     }
   }
 
@@ -16,15 +15,14 @@ int main(){
   for(int i = 0; i<m; i++ ){
     int u,v,peso;
     scanf("%d %d %d", &u, &v, &peso);
-    matriz[i][0] = u;
-    matriz[i][1] = v;
-    matriz[i][2] = peso;
+    matrizAdy[u][v] = peso; //peso de u -> v
+    matrizAdy[v][u] = peso; //peso de v -> u
   }
 
   //imprimir matriz
   for(int i=0; i<m; i++){
-    for(int j=0; j<3; j++){
-      printf("%d ", matriz[i][j]);
+    for(int j=0; j<m; j++){
+      printf("%d ", matrizAdy[i][j]);
     }
     printf("\n");
   }
