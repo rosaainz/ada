@@ -14,6 +14,19 @@ void prim(int m, int matrizAdy[m][m]){
   pesoMinimo[0] = 0; //inciar desde el vertice 0
   mst[0] = -1; //primer nodo es la raiz del mst
 
+  for(int cuenta=0; cuenta<m; cuenta++){
+    int min= INT_MAX, indice_min;
+
+  for(int v = 0; v < m; v++){
+    if(vertices[v] == 0 && pesoMinimo[v] < min){
+      min = pesoMinimo[v];
+      indice_min = v;
+    }
+  }
+
+  int u = indice_min;
+  vertices[u] = 1;
+  }
 }
 
 int main(){
