@@ -2,13 +2,13 @@
 #include<stdlib.h>
 
 void wis(int n, int v[]){
-  int *W = (int *)malloc((n-1) * sizeof(int));
+  int *W = (int *)malloc((n+1) * sizeof(int));
   int *solucion = (int *)malloc(n *  sizeof(int));
 
   W[0] = 0;
   W[1] = v[0];
 
-  for(int i=0; i<=n; i++){
+  for(int i=2; i<=n; i++){
     W[i] = (v[i-1] + W[i-2] > W[i-1]) ? v[i-1] + W[i-2] : W[i-1];
   }
 
@@ -19,11 +19,13 @@ void wis(int n, int v[]){
       i--;
     }
   }
+
   printf("%d ", W[n]);
-  for(int i = index-1; i>=0; i--){
+  for(int i = index-1; i >= 0; i--){
     printf("%d ", solucion[i]);
   }
-
+  free(W);
+  free(solucion);
 }
 
 
