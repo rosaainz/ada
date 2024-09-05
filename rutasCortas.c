@@ -4,6 +4,37 @@
 #define MAX_VERTICES 100
 #define INF INT_MAX //infinito para los que sean cero
 
+
+int encontrarVerticeDistanciaMin(int D[], int visitado[], int n){
+  int min = INF;
+  int minIndex = -1;
+
+  for(int i=0; i < n; i++){
+    if(!visitado[i] && D[i] < min){
+      min = D[i];
+      minIndex = i;
+    }
+  }
+  return minIndex;
+}
+
+void dijkstra(int grafo[MAX_VERTICES][MAX_VERTICES], int origen, int n, int D[], int Z[]){
+  int visitado[MAX_VERTICES];
+
+  for(int i=0; i<n; i++){
+    D[i] = INF;
+    Z[i] = -1;
+    visitado[i] = 0;
+  }
+
+  D[origen] = 0;
+  for(int i=0; i < n-1; i++){
+    int u = encontrarVerticeDistanciaMin(D, visitado, n);
+    printf("%d ", u);
+
+  }
+}
+
 void imprimirMatrizAdy(int grafo[MAX_VERTICES][MAX_VERTICES], int m){
   for(int i=0; i < m; i++){
     for(int j=0; j < m; j++){
@@ -44,7 +75,8 @@ int main(){
   int D[MAX_VERTICES]; //distancias
   int Z[MAX_VERTICES]; //predecesores
 
-  imprimirMatrizAdy(grafo, m);
+  dijkstra(grafo, s, n, D, Z);
+  //imprimirMatrizAdy(grafo, m);
 
   return 0;
 }
