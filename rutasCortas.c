@@ -46,6 +46,26 @@ void dijkstra(int grafo[MAX_VERTICES][MAX_VERTICES], int origen, int n, int D[],
   }
 }
 
+void imprimirRutaCorta(int Z[], int d){
+  int ruta[MAX_VERTICES];
+  int longitud = 0;
+
+  int actual = d - 1;
+  while(actual != -1){
+    ruta[longitud++] = actual;
+    actual = Z[actual];
+  }
+
+  printf("[");
+  for(int i=longitud-1; i>=0; i--){
+    printf("%d", ruta[i]+1);
+    if(i > 0){
+      printf(" ");
+    }
+  }
+  printf("]\n");
+}
+
 void imprimirMatrizAdy(int grafo[MAX_VERTICES][MAX_VERTICES], int m){
   for(int i=0; i < m; i++){
     for(int j=0; j < m; j++){
@@ -97,6 +117,8 @@ int main(){
   }else{
     printf("%d ", D[d-1]);
   }
+
+  imprimirRutaCorta(Z, d);
 
   return 0;
 }
