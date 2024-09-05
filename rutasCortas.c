@@ -21,17 +21,28 @@ int encontrarVerticeDistanciaMin(int D[], int visitado[], int n){
 void dijkstra(int grafo[MAX_VERTICES][MAX_VERTICES], int origen, int n, int D[], int Z[]){
   int visitado[MAX_VERTICES];
 
-  for(int i=0; i<n; i++){
+  for(int i=0; i < n; i++){
     D[i] = INF;
     Z[i] = -1;
     visitado[i] = 0;
   }
 
   D[origen] = 0;
+
   for(int i=0; i < n-1; i++){
     int u = encontrarVerticeDistanciaMin(D, visitado, n);
-    printf("%d ", u);
+    if(u == -1) break;
+    //printf("%d ", u);
 
+    //marcar el vertice encontrado como visitado
+    visitado[u] = 1;
+
+    for(int v=0; v < n; v++){
+      if(!visitado[v] && grafo[u][v] != INF && D[u] != INF && D[u] + grafo[u][v] < D[v]){
+        D[v] = D[u] + grafo[u][v];
+        Z[v] = u;
+      }
+    }
   }
 }
 
@@ -66,17 +77,26 @@ int main(){
   for(int i=0; i < m; i++){
     int u,v,peso;
     scanf("%d %d %d", &u, &v, &peso);
+    u--;
+    v--;
     grafo[u][v] = peso;
     grafo[v][u] = peso;
-    if(u > v) n = u;
-    if(v > n) n = v;
+    if(u >= v) n = u + 1;
+    if(v >= n) n = v + 1;
   }
+  n++;
 
   int D[MAX_VERTICES]; //distancias
   int Z[MAX_VERTICES]; //predecesores
 
-  dijkstra(grafo, s, n, D, Z);
+  dijkstra(grafo, s-1, n, D, Z);
   //imprimirMatrizAdy(grafo, m);
+
+  //costo total
+  if(D[d-1] == INF){
+  }else{
+    printf("%d ", D[d-1]);
+  }
 
   return 0;
 }
